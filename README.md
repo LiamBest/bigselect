@@ -28,7 +28,7 @@ Include the CSS and JS:
 
 Add the HTML for the select on your page:
 ```html
-<div class="big-select"
+<div class="big-select dropdown"
 	data-field-name="testDataName"
 	data-content-name="testData"
 	data-type="single"
