@@ -1,0 +1,81 @@
+.has-error .big-select button {
+    border-color: #a94442;
+}
+
+.big-select button.dropdown-toggle {
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.big-select-container {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.big-select-container .input-group {
+    margin: 5px
+}
+
+.big-select-container > li {
+    padding: 0
+}
+
+.big-select-container > li > a.big-select-all label {
+    font-weight: 700
+}
+
+.big-select-container > li.big-select-group label {
+    margin: 0;
+    padding: 3px 20px 3px 20px;
+    height: 100%;
+    font-weight: 700
+}
+
+.big-select-container > li.big-select-group-clickable label {
+    cursor: pointer
+}
+
+.big-select-container > li > a {
+    padding: 0
+}
+
+.big-select-container > li > a > label {
+    margin: 0;
+    height: 100%;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 3px 20px 3px 40px
+}
+
+.big-select-container > li > a > label.radio,
+.big-select-container > li > a > label.checkbox {
+    margin: 0
+}
+
+.big-select-container > li > a > label > input[type=checkbox] {
+    margin-bottom: 5px
+}
+
+.btn-group > .btn-group:nth-child(2) > .big-select.btn {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px
+}
+
+.form-inline .big-select-container label.checkbox,
+.form-inline .big-select-container label.radio {
+    padding: 3px 20px 3px 40px
+}
+
+.form-inline .big-select-container li a label.checkbox input[type=checkbox],
+.form-inline .big-select-container li a label.radio input[type=radio] {
+    margin-left: -20px;
+    margin-right: 0
+}
+
