@@ -77,11 +77,11 @@ $.extend(postData, bigSelectData);
 
 | Attribute         | Example Value              | Description                                                                                                     |
 |-------------------|----------------------------|-----------------------------------------------------------------------------------------------------------------|
-| class             | big-select dropdown|dropup | Requires big-select, then choose either dropdown or dropup to determine the direction it opens up.              |
+| class             | big-select dropdown\|dropup | Requires big-select, then choose either dropdown or dropup to determine the direction it opens up.              |
 | data-field-name   | testField                  | The field name when exported.                                                                                   |
 | data-content-name | testContent                | The content name, should match what you register into BigSelectData.                                            |
-| data-type         | single|multi               | Set to single to be a single-select or multi for a multi-select.                                                |
-| data-readonly     | true|false                 | Whether or not to be in readonly mode. Will still output for export.                                            |
+| data-type         | single\|multi               | Set to single to be a single-select or multi for a multi-select.                                                |
+| data-readonly     | true\|false                 | Whether or not to be in readonly mode. Will still output for export.                                            |
 | data-selected     | ["hello"]                  | JSON array of the items currently selected. [] for none.                                                        |
 | data-on-change    | functionName               | Function to call when the selects content changes, first parameter is an object with the new values.            |
 
