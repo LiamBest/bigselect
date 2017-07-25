@@ -16,9 +16,9 @@ Big Select solves these issues by:
 * Bootstrap 3 (http://getbootstrap.com/)
 
 
-### Full example page #
+### Examples page #
 
-* <a href="example.html">Example Page</a>
+Included is an examples.html file, clone or download the project and open it in any modern web browser to see an example of a single select, multi-select and dropdown/dropup set of big selects. It also produces example postData to give a concrete example of post back to your web server.
 
 
 ### Simple example snippets #
