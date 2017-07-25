@@ -16,29 +16,33 @@ Big Select solves these issues by:
 * Bootstrap 3 (http://getbootstrap.com/)
 
 
+### Full example page #
 
-### Example usage #
+* <a href="example.html">Example Page</a>
 
-Include the CSS and JS:
+
+### Simple example snippets #
+
+Include the CSS and JS for big select (see the example page for jquery/bootstrap/crel example includes):
 ```html
 <link href="/css/bigselect.css" rel="stylesheet" />
-<script type="text/javascript" src="/js/bigselect.js"></script>
+<script src="/js/bigselect.js" type="text/javascript"></script>
 ```
 
 
 Add the HTML for the select on your page:
 ```html
-<div class="big-select dropdown"
-	data-field-name="testDataName"
-	data-content-name="testData"
-	data-type="single"
-	data-readonly="false"
-	data-selected='["hello"]'>
+<div class="big-select"
+    data-field-name="testDataName"
+    data-content-name="testData"
+    data-type="single"
+    data-readonly="false"
+    data-selected='["hello"]'>
 </div>
 ```
 
 
-Register the data for the select:
+Register the data for the big select:
 ```javascript
 <script type="text/javascript">
 	BigSelectData.add("testData", {"hello":{"adminDisplayName":"Hello"},"world":{"adminDisplayName":"World"}});
@@ -55,28 +59,11 @@ Init big select on the element when document is ready:
 </script>
 ```
 
-Export the selected values before posting the data:
+Export all big selects when posting the data:
 ```javascript
 <script type="text/javascript">
-	var postData = Object();
-	$('#formid').find("input").each(function() {
-		if (typeof($(this).attr("name")) !== "undefined")
-		{
-			if ($(this).is(":checkbox"))
-			{
-				postData[ $(this).attr("name") ] = $(this).is(':checked');
-			}
-			else
-			{
-				postData[ $(this).attr("name") ] = $(this).val();
-			}
-		}
-	});
-	var bigSelectData = $('.big-select').bigselectexport();
-	$.extend(postData, bigSelectData);
-
-	// Add to request as post data, here I'm just printing the data to the console
-	console.log(postData);
+        var postData = $("#exampleForm").serialize() + "&" + $.param($(".big-select").bigselectexport());
+        // Use postData for the $.post() request
 </script>
 ```
 
@@ -94,12 +81,12 @@ Export the selected values before posting the data:
 | data-on-change    | functionName               | Function to call when the selects content changes, first parameter is an object with the new values.            |
 
 
-### Public functions #
+### Big Select public functions #
 
 | Function                                                          | Description                                                                                                                                                                                                                                                        |
 |-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | $(element).bigselect()                                            | Inits big select on the selected element.                                                                                                                                                                                                                          |
-| $(element).bigselectexport()                                      | Exports the data for this element, EG: If the name was 'testDataName' and it was a single select, the result is 'obj["testDataName"] = "value";' if it is a multi-select the result is 'obj["testDataName[]"] = "value1";obj["testDataName[]"] = "value2";'. |
+| $(element).bigselectexport()                                      | Exports the data for the selected elements, you can use $.param() to serialize the output for posting |
 | $(element).bigselectcurrent()                                     | Works the same as export, but works on a single element instead of multiple.                                                                                                                                                                                       |
 | $(element).bigselectregenerate()                                  | Regenerates big select for the selected elements, useful for updating the contents of existing big selects.                                                                                                                                                        |
 | $(element).bigselectset(mixed selectedItems, bool ignoreOnUpdate) | Sets newly selected items for this big select, takes either string for a single object, or array of strings for multiple. Useful for programmatically updating the selected items. If false is sent for ignoreOnUpdate any on change function assigned to the big select element will be ignored.                                                 |
