@@ -40,36 +40,44 @@ Add the HTML for the select on your page:
 
 Register the data for the select:
 ```javascript
-BigSelectData.add("testData", {"hello":{"adminDisplayName":"Hello"},"world":{"adminDisplayName":"World"}});
+<script type="text/javascript">
+	BigSelectData.add("testData", {"hello":{"adminDisplayName":"Hello"},"world":{"adminDisplayName":"World"}});
+</script>
 ```
 
 
 Init big select on the element when document is ready:
 ```javascript
-$(document).ready(function() {
-	$('.big-select').bigselect();
-});
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.big-select').bigselect();
+	});
+</script>
 ```
 
 Export the selected values before posting the data:
 ```javascript
-var postData = Object();
-$('#formid').find("input").each(function() {
-	if (typeof($(this).attr("name")) !== "undefined")
-	{
-		if ($(this).is(":checkbox"))
+<script type="text/javascript">
+	var postData = Object();
+	$('#formid').find("input").each(function() {
+		if (typeof($(this).attr("name")) !== "undefined")
 		{
-			postData[ $(this).attr("name") ] = $(this).is(':checked');
+			if ($(this).is(":checkbox"))
+			{
+				postData[ $(this).attr("name") ] = $(this).is(':checked');
+			}
+			else
+			{
+				postData[ $(this).attr("name") ] = $(this).val();
+			}
 		}
-		else
-		{
-			postData[ $(this).attr("name") ] = $(this).val();
-		}
-	}
-});
-var bigSelectData = $('.big-select').bigselectexport();
-$.extend(postData, bigSelectData);
-// Add to request as post data
+	});
+	var bigSelectData = $('.big-select').bigselectexport();
+	$.extend(postData, bigSelectData);
+
+	// Add to request as post data, here I'm just printing the data to the console
+	console.log(postData);
+</script>
 ```
 
 
