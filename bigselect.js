@@ -117,7 +117,6 @@
 		{
 			if (!this.$dropdown && !this.readonly)
 			{
-				console.log(1);
 				var dropdown = BigSelectData.getElements(this.contentName, this.type);
 				if (dropdown === false)
 				{
