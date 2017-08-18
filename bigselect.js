@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 !function ($)
 {
 	"use strict";
@@ -123,7 +124,7 @@ SOFTWARE.
 				buttonText,
 				crel("b", {"class": "caret"})
 			);
-			button.addEventListener("click", this.onDropdown.bind(this));
+			button.addEventListener("click", $.proxy(this.onDropdown, this));
 
 			if (!this.$button)
 			{
@@ -152,7 +153,7 @@ SOFTWARE.
 				var listElements = dropdown.getElementsByTagName("a");
 				for (i = 0; i < listElements.length; i++)
 				{
-					listElements[i].addEventListener("click", this.itemChecked.bind(this));
+					listElements[i].addEventListener("click", $.proxy(this.itemChecked, this));
 				}
 
 				if (this.selectedItems.length > 0)
@@ -203,9 +204,9 @@ SOFTWARE.
 				event.stopPropagation();
 			});
 			this.$seachInput = search.getElementsByClassName("big-select-search")[0];
-			this.$seachInput.oninput = this.filterItems.bind(this);
+			this.$seachInput.onkeyup = $.proxy(this.filterItems, this);
 
-			search.getElementsByClassName("big-select-clear-filter")[0].addEventListener("click", this.clearFilter.bind(this));
+			search.getElementsByClassName("big-select-clear-filter")[0].addEventListener("click", $.proxy(this.clearFilter, this));
 			this.$search = search;
 
 			if (this.$dropdown.childNodes.length > 0)
@@ -217,6 +218,9 @@ SOFTWARE.
 				this.$dropdown.appendChild(this.$search);
 			}
 		},
+
+		currentFilter: "",
+		pendingFilter: null,
 		filterItems: function (event)
 		{
 			if (typeof(event) !== "undefined" && event.which === 13)
@@ -224,27 +228,37 @@ SOFTWARE.
 				event.preventDefault();
 			}
 
-			var searchString = String(this.$seachInput.value).toLowerCase();
+			this.currentFilter = String(this.$seachInput.value).toLowerCase();
 
+			if (this.pendingFilter)
+			{
+				clearTimeout(this.pendingFilter);
+			}
+
+			this.pendingFilter = setTimeout(
+				$.proxy(this.applyFilter, this),
+				300
+			);
+		},
+		applyFilter: function ()
+		{
 			for (var i = 1; i < this.$dropdown.childNodes.length; i++)
 			{
-				var currentItem = this.$dropdown.childNodes[i];
-				var fieldName = String(currentItem.getElementsByClassName("itemName")[0].innerHTML).toLowerCase();
-
-				if (fieldName.indexOf(searchString) > -1)
+				if (String(this.$dropdown.childNodes[i].getElementsByClassName("itemName")[0].innerHTML).toLowerCase().indexOf(this.currentFilter) > -1)
 				{
-					currentItem.style.display = "block";
+					this.$dropdown.childNodes[i].style.display = "block";
 				}
 				else
 				{
-					currentItem.style.display = "none";
+					this.$dropdown.childNodes[i].style.display = "none";
 				}
 			}
 		},
 		clearFilter: function ()
 		{
+			this.currentFilter = '';
 			this.$seachInput.value = '';
-			this.filterItems();
+			this.applyFilter();
 		},
 		itemChecked: function (event)
 		{

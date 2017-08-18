@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 .has-error .big-select button {
     border-color: #a94442;
 }
@@ -40,6 +41,14 @@ SOFTWARE.
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.big-select-filter {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    background: #FFF;
+    z-index: 999;
 }
 
 .big-select-container .input-group {
